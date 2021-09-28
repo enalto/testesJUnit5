@@ -49,13 +49,10 @@ class CalculoSalarioTest {
 
 	@Test
 	void deveDescontar10PorCentoParaSalarioDesenvolvedorMenorQueTresMil() {
-
 		funcionario.setSalario(BigDecimal.valueOf(2999));
 		funcionario.setCargo(Cargo.DESENVOLVEDOR);
-
 		calculadoraSalario.setCalculadoraStrategy(new CalculaSalarioDesenvolvedor());
 		calculadoraSalario.getCalculadoraStrategy().calcula(funcionario);
-
 		assertThat(calculadoraSalario.getSalarioLiquido(),
 				is(equalTo(funcionario.getSalario().multiply(BigDecimal.valueOf(.90)))));
 	}
@@ -74,7 +71,6 @@ class CalculoSalarioTest {
 
 		funcionario.setSalario(BigDecimal.valueOf(5000));
 		assertThat(calculadoraSalario.getSalarioLiquido(), is(equalTo(BigDecimal.valueOf(4000.00))));
-
 	}
 
 	@Test
@@ -85,28 +81,23 @@ class CalculoSalarioTest {
 
 		calculadoraSalario.setCalculadoraStrategy(new CalculaSalarioDBA());
 		calculadoraSalario.getCalculadoraStrategy().calcula(funcionario);
-
 		assertThat(calculadoraSalario.getSalarioLiquido(),
 				is(equalTo(funcionario.getSalario().multiply(BigDecimal.valueOf(0.85)))));
 
 		funcionario.setSalario(BigDecimal.valueOf(1000));
-
 		assertTrue(calculadoraSalario.getSalarioLiquido().compareTo(BigDecimal.valueOf(850)) == 0);
 
 	}
 
 	@Test
 	void deveDescontar25PorCentoParaSalarioDBAMaiorQueDoisMil() {
-
 		funcionario.setSalario(BigDecimal.valueOf(2800));
 		funcionario.setCargo(Cargo.DBA);
 
 		calculadoraSalario.setCalculadoraStrategy(new CalculaSalarioDBA());
 		calculadoraSalario.getCalculadoraStrategy().calcula(funcionario);
-
 		assertThat(calculadoraSalario.getSalarioLiquido(),
 				is(equalTo(funcionario.getSalario().multiply(BigDecimal.valueOf(0.75)))));
-
 		funcionario.setSalario(BigDecimal.valueOf(2000));
 
 		assertTrue(calculadoraSalario.getSalarioLiquido().compareTo(BigDecimal.valueOf(1500)) == 0);
@@ -118,7 +109,6 @@ class CalculoSalarioTest {
 
 		funcionario.setSalario(BigDecimal.valueOf(1000));
 		funcionario.setCargo(Cargo.TESTADOR);
-
 		calculadoraSalario.setCalculadoraStrategy(new CalculaSalarioTestador());
 		calculadoraSalario.getCalculadoraStrategy().calcula(funcionario);
 
@@ -126,9 +116,7 @@ class CalculoSalarioTest {
 				is(equalTo(funcionario.getSalario().multiply(BigDecimal.valueOf(0.85)))));
 
 		funcionario.setSalario(BigDecimal.valueOf(550));
-
 		assertTrue(calculadoraSalario.getSalarioLiquido().compareTo(BigDecimal.valueOf(467.50)) == 0);
-
 	}
 
 	@Test
@@ -142,9 +130,7 @@ class CalculoSalarioTest {
 
 		assertThat(calculadoraSalario.getSalarioLiquido(),
 				is(equalTo(funcionario.getSalario().multiply(BigDecimal.valueOf(0.75)))));
-
 		funcionario.setSalario(BigDecimal.valueOf(2000));
-
 		assertTrue(calculadoraSalario.getSalarioLiquido().compareTo(BigDecimal.valueOf(1500)) == 0);
 
 	}
@@ -154,13 +140,10 @@ class CalculoSalarioTest {
 
 		funcionario.setSalario(BigDecimal.valueOf(4999));
 		funcionario.setCargo(Cargo.GERENTE);
-
 		calculadoraSalario.setCalculadoraStrategy(new CalculaSalarioGerente());
 		calculadoraSalario.getCalculadoraStrategy().calcula(funcionario);
-
 		assertThat(calculadoraSalario.getSalarioLiquido(),
 				is(equalTo(funcionario.getSalario().multiply(BigDecimal.valueOf(0.80)))));
-
 		funcionario.setSalario(BigDecimal.valueOf(2500));
 
 		assertTrue(calculadoraSalario.getSalarioLiquido().compareTo(BigDecimal.valueOf(2000)) == 0);
