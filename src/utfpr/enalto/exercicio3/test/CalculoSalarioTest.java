@@ -135,7 +135,7 @@ class CalculoSalarioTest {
 	void deveDescontar25PorCentoParaSalarioTestadorMaiorQueDoisMil() {
 
 		funcionario.setSalario(BigDecimal.valueOf(2800));
-		funcionario.setCargo(Cargo.DBA);
+		funcionario.setCargo(Cargo.TESTADOR);
 
 		calculadoraSalario.setCalculadoraStrategy(new CalculaSalarioTestador());
 		calculadoraSalario.getCalculadoraStrategy().calcula(funcionario);
